@@ -32,7 +32,7 @@
       "onAutoForward": "notify"
     }
   },
-  "postCreateCommand": "npm install && chmod +x setup-codespaces.sh",
+  "postCreateCommand": "pnpm install && chmod +x setup-codespaces.sh",
   "postStartCommand": "./setup-codespaces.sh",
   "remoteUser": "node"
 }

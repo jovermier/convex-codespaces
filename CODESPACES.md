@@ -74,6 +74,6 @@ If Convex isn't connecting:
 
 If you encounter build errors:
 
-1. Clear node_modules: `rm -rf node_modules && npm install`
+1. Clear node_modules: `rm -rf node_modules && pnpm install`
 2. Clear Convex cache: `npx convex dev --once --clear`
 3. Restart the development servers

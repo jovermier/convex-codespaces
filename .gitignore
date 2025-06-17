@@ -3,4 +3,5 @@ node_modules
 dist
 .env.local
 .env.docker
+.pnpm-store
 .history
