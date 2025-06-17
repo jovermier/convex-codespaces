@@ -1,0 +1,38 @@
+{
+  "name": "Convex Tutorial",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.vscode-typescript-next",
+        "bradlc.vscode-tailwindcss",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-json"
+      ],
+      "settings": {
+        "typescript.preferences.includePackageJsonAutoImports": "on"
+      }
+    }
+  },
+  "forwardPorts": [3000, 5173, 8187],
+  "portsAttributes": {
+    "3000": {
+      "label": "Convex Dashboard",
+      "onAutoForward": "notify"
+    },
+    "5173": {
+      "label": "Vite Dev Server",
+      "onAutoForward": "openBrowser"
+    },
+    "8187": {
+      "label": "Convex Dev Server",
+      "onAutoForward": "notify"
+    }
+  },
+  "postCreateCommand": "npm install && chmod +x setup-codespaces.sh",
+  "postStartCommand": "./setup-codespaces.sh",
+  "remoteUser": "node"
+}
