@@ -2,8 +2,12 @@
   "name": "Convex Tutorial",
   "image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye",
   "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    "ghcr.io/devcontainers-extra/features/pnpm:2": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "privileged": true
+    }
   },
   "customizations": {
     "vscode": {
@@ -18,18 +22,27 @@
       }
     }
   },
-  "forwardPorts": [3000, 5173, 6791, 8187],
+
+  "forwardPorts": [3000, 3210, 3211, 5173, 6791, 8187],
   "portsAttributes": {
-    "3000": {
-      "label": "Convex Dashboard",
-      "onAutoForward": "notify"
-    },
     "5173": {
       "label": "Vite Dev Server",
       "onAutoForward": "openBrowser"
     },
+    "3000": {
+      "label": "Vite Prod Server",
+      "onAutoForward": "notify"
+    },
     "6791": {
-      "label": "Self-hosted Dashboard",
+      "label": "Self-hosted Convex Dashboard",
+      "onAutoForward": "notify"
+    },
+    "3210": {
+      "label": "Self-hosted Convex Cloud Origin",
+      "onAutoForward": "notify"
+    },
+    "3211": {
+      "label": "Self-hosted Convex Site Origin",
       "onAutoForward": "notify"
     },
     "8187": {

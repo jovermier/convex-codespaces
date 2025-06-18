@@ -16,9 +16,10 @@
     "docker:generate-admin-key": "docker-compose exec backend ./generate_admin_key.sh",
     "self-hosted:setup": "./setup-self-hosted.sh",
     "self-hosted:setup-manual": "pnpm run docker:up && echo 'Waiting for backend to start...' && sleep 10 && pnpm run docker:generate-admin-key",
-    "self-hosted:dev": "npm-run-all --parallel docker:up dev:frontend",
+    "self-hosted:dev": "npm-run-all --sequential docker:up deploy-functions dev:frontend",
     "self-hosted:stop": "docker-compose down",
-    "convex:update": "pnpm install convex@latest"
+    "convex:update": "pnpm install convex@latest",
+    "deploy-functions": "sleep 1 && convex dev --once"
   },
   "dependencies": {
     "@faker-js/faker": "^8.0.2",

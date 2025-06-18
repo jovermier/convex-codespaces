@@ -21,7 +21,7 @@ else
 fi
 
 echo "🎯 Ready to start development!"
-echo "Run: npm run dev:codespaces"
+echo "Run: pnpm run dev:codespaces"
 echo ""
 echo "Your app will be available on port 5173"
 echo "Convex dashboard (if applicable) will be on port 8187"
