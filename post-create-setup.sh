@@ -5,6 +5,7 @@
 echo "🚀 Running post-create setup for Convex..."
 
 echo "📦 Installing project dependencies..."
+pnpm config set ignore-scripts false
 pnpm install
 
 # Checking and creating .env files
