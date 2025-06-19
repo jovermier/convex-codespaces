@@ -50,7 +50,7 @@ if [ -z "$ADMIN_KEY" ]; then
 fi
 
 if grep -q '^CONVEX_SELF_HOSTED_ADMIN_KEY=' "$env_file"; then
-    sed -i "s|^CONVEX_SELF_HOSTED_ADMIN_KEY=.*|CONVEX_SELF_HOSTED_ADMIN_KEY=$ADMIN_KEY|" "$env_file"
+    sed -i "s#^CONVEX_SELF_HOSTED_ADMIN_KEY=.*#CONVEX_SELF_HOSTED_ADMIN_KEY=$ADMIN_KEY#" "$env_file"
 else
     echo "CONVEX_SELF_HOSTED_ADMIN_KEY=$ADMIN_KEY" >> "$env_file"
 fi
