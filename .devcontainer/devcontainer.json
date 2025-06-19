@@ -27,6 +27,7 @@
   },
 
   "forwardPorts": [3000, 3210, 3211, 5173, 6791, 8187],
+  "appPort": [3000, 3210, 3211, 5173, 6791, 8187],
   "portsAttributes": {
     "5173": {
       "label": "Vite Dev Server",

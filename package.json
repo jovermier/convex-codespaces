@@ -6,7 +6,6 @@
     "dev:codespaces": "npm-run-all --parallel dev:backend dev",
     "build": "tsc && vite build",
     "dev:backend": "convex dev",
-    "predev": "convex dev --once",
     "docker:up": "docker compose --env-file .env.docker up -d",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",
