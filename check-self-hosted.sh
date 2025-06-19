@@ -29,8 +29,7 @@ if ! curl -f http://localhost:3210/version > /dev/null 2>&1; then
     exit 1
 fi
 
-pnpm run dev
-
 echo ""
 echo "✅ Setup complete!"
 echo ""
+echo "👉 Now run 'pnpm dev' to start the development server."
