@@ -1,4 +1,4 @@
-# Convex Tutorial
+# Convex Codespaces
 
 You're just a few minutes away from having a chat app powered by Convex.
 
