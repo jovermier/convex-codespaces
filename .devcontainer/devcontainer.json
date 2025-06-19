@@ -14,8 +14,11 @@
       "extensions": [
         "ms-vscode.vscode-typescript-next",
         "bradlc.vscode-tailwindcss",
+        "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
-        "ms-vscode.vscode-json"
+        "ms-vscode.vscode-json",
+        "GitHub.copilot",
+        "GitHub.copilot-chat"
       ],
       "settings": {
         "typescript.preferences.includePackageJsonAutoImports": "on"
