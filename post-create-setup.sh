@@ -42,11 +42,6 @@ if [ -n "$CODESPACE_NAME" ]; then
         echo "CONVEX_SELF_HOSTED_URL=$CONVEX_SELF_HOSTED_URL" >> "$env_file"
     fi
     echo "Set CONVEX_SELF_HOSTED_URL to $CONVEX_SELF_HOSTED_URL in $env_file."
-    # Set Codespace ports 3210 and 5173 to public
-    gh codespace ports visibility 3210:public --codespace "$CODESPACE_NAME"
-    echo "Set Codespace port 3210 to public."
-    gh codespace ports visibility 5173:public --codespace "$CODESPACE_NAME"
-    echo "Set Codespace port 5173 to public."
 fi
 
 # Check if Docker is running
@@ -57,6 +52,14 @@ fi
 
 echo "🐳 Starting Docker containers..."
 pnpm run docker:up
+
+# Set Codespace ports 3210 and 5173 to public
+if [ -n "$CODESPACE_NAME" ]; then
+    gh codespace ports visibility 3210:public --codespace "$CODESPACE_NAME"
+    echo "Set Codespace port 3210 to public."
+    gh codespace ports visibility 5173:public --codespace "$CODESPACE_NAME"
+    echo "Set Codespace port 5173 to public."
+fi
 
 echo "🔑 Generating admin key (for Docker backend)..."
 ADMIN_KEY=$(docker compose exec -T backend ./generate_admin_key.sh)
