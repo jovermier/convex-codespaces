@@ -46,7 +46,7 @@
       "onAutoForward": "silent"
     }
   },
-  "postCreateCommand": "./post-create-setup.sh",
-  "postStartCommand": "./check-self-hosted.sh",
+  "postCreateCommand": ".devcontainer/post-create.sh",
+  "postStartCommand": ".devcontainer/post-start.sh",
   "remoteUser": "node"
 }
