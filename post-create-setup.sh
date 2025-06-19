@@ -42,6 +42,15 @@ if [ -n "$CODESPACE_NAME" ]; then
         echo "CONVEX_SELF_HOSTED_URL=$CONVEX_SELF_HOSTED_URL" >> "$env_file"
     fi
     echo "Set CONVEX_SELF_HOSTED_URL to $CONVEX_SELF_HOSTED_URL in $env_file."
+
+    # Update Convex URLs in .env.docker for Codespaces
+    CONVEX_CLOUD_ORIGIN="https://${CODESPACE_NAME}-3210.app.github.dev"
+    CONVEX_SITE_ORIGIN="https://${CODESPACE_NAME}-3211.app.github.dev"
+    NEXT_PUBLIC_DEPLOYMENT_URL="https://${CODESPACE_NAME}-3210.app.github.dev"
+    sed -i "s#^CONVEX_CLOUD_ORIGIN=.*#CONVEX_CLOUD_ORIGIN=$CONVEX_CLOUD_ORIGIN#" "$docker_env_file"
+    sed -i "s#^CONVEX_SITE_ORIGIN=.*#CONVEX_SITE_ORIGIN=$CONVEX_SITE_ORIGIN#" "$docker_env_file"
+    sed -i "s#^NEXT_PUBLIC_DEPLOYMENT_URL=.*#NEXT_PUBLIC_DEPLOYMENT_URL=$NEXT_PUBLIC_DEPLOYMENT_URL#" "$docker_env_file"
+    echo "Set Convex URLs for Codespaces in $docker_env_file."
 fi
 
 # Check if Docker is running
