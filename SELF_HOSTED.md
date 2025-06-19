@@ -47,12 +47,6 @@ npm run self-hosted:setup
 
 Before you can use the self-hosted Convex backend, you need to:
 
-1. **Update Convex to the latest version** (required for self-hosting):
-
-   ```bash
-   npm run convex:update
-   ```
-
 2. **Start the backend and generate admin key**:
 
    ```bash
@@ -193,8 +187,7 @@ docker-compose down -v  # This removes volumes and all data!
 2. **Connection issues**: Ensure Docker services are healthy by checking `npm run docker:logs`
 3. **Frontend not connecting**: Verify `VITE_CONVEX_URL` in `.env.local` matches your backend configuration
 4. **Authentication errors**: Make sure you've generated and configured the admin key properly
-5. **Function deployment fails**: Ensure you're using the latest version of Convex (`npm run convex:update`)
-6. **Missing functions**: After switching to self-hosted, redeploy with `npx convex dev`
+5. **Missing functions**: After switching to self-hosted, redeploy with `npx convex dev`
 
 ### Useful Commands
 
@@ -204,9 +197,6 @@ npm run docker:generate-admin-key
 
 # View backend logs
 npm run docker:logs
-
-# Update Convex to latest version
-npm run convex:update
 
 # Export data before migration
 npx convex export --path backup.zip

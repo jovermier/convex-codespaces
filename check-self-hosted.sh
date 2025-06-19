@@ -15,13 +15,9 @@ if [ ! -f ".env.docker" ]; then
     exit 1
 fi
 
-# Update Convex to latest version
-echo "📦 Updating Convex to latest version..."
-pnpm install convex@latest
-
 # Start Docker containers
 echo "🐳 Starting Docker containers..."
-docker-compose --env-file .env.docker up -d
+pnpm run docker:up
 
 # Wait for backend to be ready
 echo "⏳ Waiting for backend to start..."
@@ -33,28 +29,8 @@ if ! curl -f http://localhost:3210/version > /dev/null 2>&1; then
     exit 1
 fi
 
-# Generate admin key
-echo "🔑 Generating admin key..."
-ADMIN_KEY=$(docker-compose exec -T backend ./generate_admin_key.sh)
-
-if [ -z "$ADMIN_KEY" ]; then
-    echo "❌ Failed to generate admin key. Check logs with: npm run docker:logs"
-    exit 1
-fi
+pnpm run dev
 
 echo ""
 echo "✅ Setup complete!"
 echo ""
-echo "📝 Next steps:"
-echo "1. Update your .env.local"
-echo ""
-echo "2. Deploy your functions:"
-echo "   npx convex dev"
-echo ""
-echo "3. Start your frontend:"
-echo "   pnpm run dev:frontend"
-echo ""
-echo "🌐 Services:"
-echo "   - Backend: http://localhost:3210"
-echo "   - Dashboard: http://localhost:6791"
-echo "   - Frontend: http://localhost:5173"

@@ -50,7 +50,7 @@
       "onAutoForward": "notify"
     }
   },
-  "postCreateCommand": "pnpm install && chmod +x setup-codespaces.sh",
-  "postStartCommand": "./setup-codespaces.sh",
+  "postCreateCommand": "./post-create-setup.sh",
+  "postStartCommand": "./check-self-hosted.sh",
   "remoteUser": "node"
 }
