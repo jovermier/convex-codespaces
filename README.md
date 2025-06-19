@@ -53,7 +53,7 @@ Codespaces is the **primary intended way** to use this repo. All setup and devel
    ```
 4. **Access your app:**
    - Frontend: [http://localhost:5173](http://localhost:5173)
-   - Convex Dev Server: [http://localhost:8187](http://localhost:8187)
+   - Convex Dev Server: [http://localhost:3210](http://localhost:3210)
 
 ---
 
@@ -237,8 +237,8 @@ This project is configured to work seamlessly with GitHub Codespaces.
 The following ports are automatically forwarded:
 
 - **5173**: Vite development server (your React app)
-- **8187**: Convex development server
-- **3000**: Convex dashboard (if using self-hosted)
+- **3210**: Convex development server
+- **6791**: Convex dashboard (if using self-hosted)
 
 #### Accessing Your App
 
@@ -246,4 +246,4 @@ Once the development server is running:
 
 1. Click on the "Ports" tab in VS Code
 2. Click the globe icon next to port 5173 to open your app
-3. The Convex dashboard will be available on port 8187 (if running)
+3. The Convex dashboard will be available on port 6791 (if running)

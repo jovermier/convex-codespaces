@@ -33,6 +33,22 @@ if [ ! -f "$docker_env_file" ]; then
     fi
 fi
 
+# Set CONVEX_SELF_HOSTED_URL in .env.local if running in Codespaces
+if [ -n "$CODESPACE_NAME" ]; then
+    CONVEX_SELF_HOSTED_URL="https://${CODESPACE_NAME}-3210.app.github.dev"
+    if grep -q '^CONVEX_SELF_HOSTED_URL=' "$env_file"; then
+        sed -i "s#^CONVEX_SELF_HOSTED_URL=.*#CONVEX_SELF_HOSTED_URL=$CONVEX_SELF_HOSTED_URL#" "$env_file"
+    else
+        echo "CONVEX_SELF_HOSTED_URL=$CONVEX_SELF_HOSTED_URL" >> "$env_file"
+    fi
+    echo "Set CONVEX_SELF_HOSTED_URL to $CONVEX_SELF_HOSTED_URL in $env_file."
+    # Set Codespace ports 3210 and 5173 to public
+    gh codespace ports visibility 3210:public --codespace "$CODESPACE_NAME"
+    echo "Set Codespace port 3210 to public."
+    gh codespace ports visibility 5173:public --codespace "$CODESPACE_NAME"
+    echo "Set Codespace port 5173 to public."
+fi
+
 # Check if Docker is running
 if ! docker info > /dev/null 2>&1; then
     echo "❌ Docker is not running. Please start Docker and try again."

@@ -26,16 +26,12 @@
     }
   },
 
-  "forwardPorts": [3000, 3210, 3211, 5173, 6791, 8187],
-  "appPort": [3000, 3210, 3211, 5173, 6791, 8187],
+  "forwardPorts": [3210, 3211, 5173, 6791],
+  "appPort": [5173, 6791],
   "portsAttributes": {
     "5173": {
       "label": "Vite Dev Server",
       "onAutoForward": "openBrowser"
-    },
-    "3000": {
-      "label": "Vite Prod Server",
-      "onAutoForward": "notify"
     },
     "6791": {
       "label": "Self-hosted Convex Dashboard",
@@ -43,15 +39,11 @@
     },
     "3210": {
       "label": "Self-hosted Convex Cloud Origin",
-      "onAutoForward": "notify"
+      "onAutoForward": "silent"
     },
     "3211": {
       "label": "Self-hosted Convex Site Origin",
-      "onAutoForward": "notify"
-    },
-    "8187": {
-      "label": "Convex Dev Server",
-      "onAutoForward": "notify"
+      "onAutoForward": "silent"
     }
   },
   "postCreateCommand": "./post-create-setup.sh",
