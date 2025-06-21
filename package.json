@@ -1,6 +1,14 @@
 {
-  "name": "convex-tutorial",
+  "name": "convex-codespaces",
   "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jovermier/convex-codespaces.git"
+  },
+  "homepage": "https://github.com/jovermier/convex-codespaces#readme",
+  "bugs": {
+    "url": "https://github.com/jovermier/convex-codespaces/issues"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
