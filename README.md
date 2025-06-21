@@ -1,25 +1,21 @@
-# Convex Codespaces
+# Convex Self-Hosted Tutorial
 
-You're just a few minutes away from having a chat app powered by Convex.
+You're just a few minutes away from having a chat app powered by self-hosted Convex.
 
----
+This project supports three deployment options:
 
-## GitHub Codespaces
-
-This project is configured to work seamlessly with GitHub Codespaces.
-
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new/?skip_quickstart=true&machine=basicLinux32gb&repo=1003183238&ref=main&devcontainer_path=.devcontainer%2Fdevcontainer.json&geo=UsEast)
-
-Codespaces is the **primary intended way** to use this repo. All setup and development is automated for you in the cloud.
+- **GitHub Codespaces** (recommended) - Fully automated setup
+- **Local Development Container** - Consistent local environment
+- **Local Development** - Direct local setup
 
 ---
 
 ## Table of Contents
 
 - [Getting Started](#getting-started)
-- [Local Development (Convex Cloud)](#local-development-convex-cloud)
-- [Self-Hosted Setup (Docker)](#self-hosted-setup-docker)
-- [Switching Between Cloud and Self-Hosted](#switching-between-cloud-and-self-hosted)
+- [GitHub Codespaces Setup](#github-codespaces-setup)
+- [Local Development Container](#local-development-container)
+- [Local Development Setup](#local-development-setup)
 - [Development Commands](#development-commands)
 - [Accessing Services](#accessing-services)
 - [Troubleshooting](#troubleshooting)
@@ -32,135 +28,144 @@ Codespaces is the **primary intended way** to use this repo. All setup and devel
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) and [pnpm](https://pnpm.io/)
-- [Docker](https://www.docker.com/) and Docker Compose (for self-hosted)
+- [Docker](https://www.docker.com/) and Docker Compose
 
 ---
 
-## Local Development (Convex Cloud)
+## GitHub Codespaces Setup
 
-1. **Install dependencies:**
+This project is configured to work seamlessly with GitHub Codespaces with fully automated setup.
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new/?skip_quickstart=true&machine=basicLinux32gb&repo=1003183238&ref=main&devcontainer_path=.devcontainer%2Fdevcontainer.json&geo=UsEast)
+
+1. **Open in Codespaces**: Click the "Code" button on GitHub and select "Create codespace on main"
+2. **Wait for setup**: The post-create script will automatically:
+   - Install dependencies with pnpm
+   - Create environment files from examples
+   - Configure Codespace URLs for ports 3210 and 3211
+   - Set ports 3210 and 5173 to public
+   - Start Docker containers
+   - Generate admin key
+   - Deploy Convex functions
+   - Stop Docker containers (ready for development)
+3. **Start development**: Once setup is complete, run:
    ```bash
-   pnpm install
+   pnpm run docker:up  # Start the Convex backend
+   pnpm dev           # Start the Vite development server
    ```
-2. **Login and initialize Convex:**
-   ```bash
-   pnpm dlx convex login
-   pnpm dlx convex init
-   ```
-3. **Start the development servers:**
-   ```bash
-   pnpm dev
-   ```
-4. **Access your app:**
-   - Frontend: [http://localhost:5173](http://localhost:5173)
-   - Convex Dev Server: [http://localhost:3210](http://localhost:3210)
+   Note: The post-start script will automatically start Docker containers when the Codespace restarts.
+
+#### Port Configuration
+
+The following ports are automatically forwarded and configured:
+
+- **5173**: Vite development server (your React app)
+- **3210**: Convex self-hosted backend
+- **6791**: Convex dashboard
+
+#### Accessing Your App
+
+Once the development server is running:
+
+1. Click on the "Ports" tab in VS Code
+2. Click the globe icon next to port 5173 to open your app
+3. The Convex dashboard will be available on port 6791
 
 ---
 
-## Self-Hosted Setup (Docker)
+## Local Development Container
 
-This project supports running Convex in a self-hosted environment using Docker containers.
+If you prefer to run the development container locally:
 
-### 1. Configure Environment
+1. **Prerequisites**: Ensure Docker Desktop is running
+2. **Open in VS Code**: Open this project in VS Code with the Dev Containers extension
+3. **Reopen in Container**: VS Code will prompt to reopen in container, or use `Ctrl+Shift+P` → "Dev Containers: Reopen in Container"
+4. **Wait for setup**: The post-create script will automatically:
+   - Install dependencies with pnpm
+   - Create environment files from examples
+   - Start Docker containers
+   - Generate admin key
+   - Deploy Convex functions
+   - Stop Docker containers (ready for development)
+5. **Start development**: Once setup is complete, run:
+   ```bash
+   pnpm run docker:up  # Start the Convex backend
+   pnpm dev           # Start the Vite development server
+   ```
+   Note: The post-start script will automatically start Docker containers when the container restarts.
 
-- Copy and edit the environment files if needed:
-  ```bash
-  cp .env.local.example .env.local
-  cp .env.docker.example .env.docker
-  ```
-- **Edit `.env.docker`**:
-  - Change `INSTANCE_SECRET` to a secure value (do not use the default for production!)
-  - Adjust ports if needed
-- **Edit `.env.local`**:
-  - Comment out any cloud URL:
-    ```bash
-    # VITE_CONVEX_URL=...
-    ```
-  - Uncomment and set the self-hosted URL:
-    ```bash
-    VITE_CONVEX_URL=http://localhost:3210
-    CONVEX_SELF_HOSTED_URL=http://localhost:3210
-    # CONVEX_SELF_HOSTED_ADMIN_KEY= (will be set automatically)
-    ```
+---
 
-### 2. First Time Setup (Automated)
+## Local Development Setup
 
-Run the post-create setup script (automatically run in Codespaces/devcontainer, or run manually):
+For direct local development without containers:
+
+### 1. Install Dependencies
 
 ```bash
-./post-create-setup.sh
+pnpm install
+```
+
+### 2. Configure Environment
+
+Copy and edit the environment files:
+
+```bash
+cp .env.local.example .env.local
+cp .env.docker.example .env.docker
+```
+
+**Edit `.env.docker`**:
+
+- Change `INSTANCE_SECRET` to a secure value (do not use the default for production!)
+- Adjust ports if needed
+
+**Edit `.env.local`**:
+
+- Set the self-hosted URL:
+  ```bash
+  VITE_CONVEX_URL=http://localhost:3210
+  CONVEX_SELF_HOSTED_URL=http://localhost:3210
+  # CONVEX_SELF_HOSTED_ADMIN_KEY= (will be set automatically)
+  ```
+
+### 3. First Time Setup
+
+Run the post-create setup script manually:
+
+```bash
+pnpm run self-hosted:setup-manual
 ```
 
 This will:
 
-- Install dependencies
-- Create `.env.local` and `.env.docker` if missing
+- Create environment files if they don't exist
 - Start Docker containers
 - Generate an admin key and update `.env.local`
 - Deploy Convex functions
 - Stop Docker containers
 
-### 3. Start Self-Hosted Development
-
-Start both backend and frontend (sequential):
+### 4. Start Development
 
 ```bash
-pnpm run self-hosted:dev
+pnpm run docker:up  # Start the Convex backend
+pnpm dev           # Start the Vite development server
 ```
 
-Stop the backend:
-
-```bash
-pnpm run self-hosted:stop
-```
-
-### 4. Manual Setup (Alternative)
-
-If you want to do the steps manually:
-
-1. Start backend and generate admin key:
-   ```bash
-   pnpm run self-hosted:setup-manual
-   ```
-2. Update `.env.local` with the generated admin key (if not set automatically):
-   - Set `CONVEX_SELF_HOSTED_ADMIN_KEY=<paste-key-here>`
-3. Deploy functions:
-   ```bash
-   pnpm dlx convex dev
-   ```
-
----
-
-## Switching Between Cloud and Self-Hosted
-
-- **To use Convex Cloud:**
-
-  1. In `.env.local`, comment out `VITE_CONVEX_URL=http://localhost:3210`
-  2. Uncomment and set your cloud URL: `VITE_CONVEX_URL=...`
-  3. Run `pnpm dev`
-
-- **To use Self-Hosted:**
-  1. In `.env.local`, comment out the cloud URL
-  2. Uncomment/set `VITE_CONVEX_URL=http://localhost:3210`
-  3. Run `pnpm run self-hosted:dev`
+Note: You need to run both commands - the Docker containers for the Convex backend and the Vite development server separately.
 
 ---
 
 ## Development Commands
 
-- `pnpm dev` - Start frontend (and backend if using Convex Cloud)
-- `pnpm run dev:backend` - Start Convex backend (Cloud)
-- `pnpm run dev:frontend` - Start frontend only
-- `pnpm run build` - Build frontend for production
+- `pnpm dev` - Start Vite development server (frontend only)
 - `pnpm run docker:up` - Start self-hosted Convex backend (Docker)
 - `pnpm run docker:down` - Stop Docker containers
 - `pnpm run docker:logs` - View logs from Docker containers
 - `pnpm run docker:generate-admin-key` - Generate admin key for self-hosted backend
-- `pnpm run self-hosted:setup-manual` - Manual self-hosted setup (with wait)
-- `pnpm run self-hosted:dev` - Start self-hosted backend and frontend (sequential)
-- `pnpm run self-hosted:stop` - Stop self-hosted backend
-- `pnpm run convex:update` - Update Convex to latest version
-- `pnpm run deploy-functions` - Deploy Convex functions (used internally)
+- `pnpm run deploy-functions` - Deploy Convex functions to self-hosted backend
+- `pnpm run build` - Build frontend for production
+- `pnpm run self-hosted:setup-manual` - Run post-create setup manually
 
 > All scripts use `pnpm`. If you encounter issues, ensure you are using `pnpm` for installing dependencies and running commands.
 
@@ -180,11 +185,11 @@ If you want to do the steps manually:
 - **Connection issues**: Ensure Docker services are healthy by checking `pnpm run docker:logs`
 - **Frontend not connecting**: Verify `VITE_CONVEX_URL` in `.env.local` matches your backend configuration
 - **Authentication errors**: Make sure you've generated and configured the admin key properly
-- **Missing functions**: After switching to self-hosted, redeploy with `pnpm dlx convex dev`
+- **Missing functions**: After switching to self-hosted, redeploy with `pnpm run deploy-functions`
 - **Build issues**:
   1. Clear node_modules: `rm -rf node_modules && pnpm install`
-  2. Clear Convex cache: `pnpm dlx convex dev --once --clear`
-  3. Restart the development servers
+  2. Clear Convex cache: `pnpm run deploy-functions`
+  3. Restart both the Docker containers and development server
 - **Data persistence**: Docker volumes are used for backend data. To reset:
   ```bash
   docker compose down -v  # Removes volumes and all data!
@@ -200,10 +205,10 @@ pnpm run docker:generate-admin-key
 pnpm run docker:logs
 
 # Export data before migration
-pnpm dlx convex export --path backup.zip
+pnpm run convex export --path backup.zip
 
 # Import data after setup
-pnpm dlx convex import --replace-all backup.zip
+pnpm run convex import --replace-all backup.zip
 ```
 
 ---
@@ -211,39 +216,3 @@ pnpm dlx convex import --replace-all backup.zip
 ## Security Note
 
 **Always change the `INSTANCE_SECRET` in `.env.docker` before deploying to any non-local environment!**
-
----
-
-## GitHub Codespaces
-
-This project is configured to work seamlessly with GitHub Codespaces.
-
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new/?skip_quickstart=true&machine=basicLinux32gb&repo=1003183238&ref=main&devcontainer_path=.devcontainer%2Fdevcontainer.json&geo=UsEast)
-
-1. **Open in Codespaces**: Click the "Code" button on GitHub and select "Create codespace on main"
-2. **Wait for setup**: The devcontainer will automatically install dependencies
-3. **Set up Convex**: You'll need to configure your Convex deployment:
-   ```bash
-   pnpm dlx convex login
-   pnpm dlx convex init
-   ```
-4. **Start development**: Run the development servers:
-   ```bash
-   pnpm run dev:codespaces
-   ```
-
-#### Port Configuration
-
-The following ports are automatically forwarded:
-
-- **5173**: Vite development server (your React app)
-- **3210**: Convex development server
-- **6791**: Convex dashboard (if using self-hosted)
-
-#### Accessing Your App
-
-Once the development server is running:
-
-1. Click on the "Ports" tab in VS Code
-2. Click the globe icon next to port 5173 to open your app
-3. The Convex dashboard will be available on port 6791 (if running)
