@@ -18,7 +18,15 @@
         "esbenp.prettier-vscode",
         "ms-vscode.vscode-json",
         "GitHub.copilot",
-        "GitHub.copilot-chat"
+        "GitHub.copilot-chat",
+        "ms-vscode.vscode-docker",
+        "herrmannplatz.npm-dependency-links",
+        "christian-kohler.path-intellisense",
+        "bradlc.vscode-react-refactor",
+        "formulahendry.auto-rename-tag",
+        "ms-vscode.vscode-git-graph",
+        "donjayamanne.githistory",
+        "usernamehw.errorlens"
       ],
       "settings": {
         "typescript.preferences.includePackageJsonAutoImports": "on"
