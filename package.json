@@ -14,19 +14,19 @@
     "deploy-functions": "convex dev --once"
   },
   "dependencies": {
-    "@faker-js/faker": "^8.0.2",
+    "@faker-js/faker": "^9.8.0",
     "convex": "1.24.8",
-    "prettier": "3.5.2",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "prettier": "3.5.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@types/babel__core": "^7.20.0",
-    "@types/node": "^18.17.0",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
+    "@types/node": "^24.0.3",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.2.1",
-    "typescript": "~5.0.3",
-    "vite": "^5.4.12"
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5"
   }
 }
